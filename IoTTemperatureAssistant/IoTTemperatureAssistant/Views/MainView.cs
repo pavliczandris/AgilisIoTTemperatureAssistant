@@ -9,8 +9,8 @@ namespace IoTTemperatureAssistant
 {
     public partial class MainView : Form
     {
-        private TemperatureService tempService = new TemperatureService();
-        private FileService fileService = new FileService();
+        private TemperatureService tempService;
+        private FileService fileService;
 
         public SettingsModel Settings { get; set; }
         public List<TempData> InsideDataList { get; set; }
@@ -19,7 +19,10 @@ namespace IoTTemperatureAssistant
         public MainView()
         {
             InitializeComponent();
-            Settings = new SettingsModel { City = "Budapest" };
+            tempService = new TemperatureService();
+            fileService = new FileService();
+
+            Settings = fileService.LoadSettingsFromFile();
             lbCity.Text = Settings.City;
             InsideDataList = new List<TempData>();
             OutsideDataList = new List<TempData>();
@@ -59,6 +62,8 @@ namespace IoTTemperatureAssistant
                 if (settingsForm.ShowDialog(this) == DialogResult.OK)
                 {
                     Settings = settingsForm.Settings;
+                    fileService.SaveSettingsToFile(Settings);
+
                     lbCity.Text = Settings.City;
                 }
             }

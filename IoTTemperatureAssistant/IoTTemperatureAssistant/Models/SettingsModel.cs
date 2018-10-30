@@ -1,5 +1,8 @@
-﻿namespace IoTTemperatureAssistant.Models
+﻿using System;
+
+namespace IoTTemperatureAssistant.Models
 {
+    [Serializable]
     public class SettingsModel
     {
         public string City { get; set; }

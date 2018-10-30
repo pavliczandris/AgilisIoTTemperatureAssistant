@@ -2,11 +2,38 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace IoTTemperatureAssistant.Services
 {
     public class FileService
     {
+        private readonly string settingsFileName = "settings.stg";
+        public void SaveSettingsToFile(SettingsModel settings)
+        {
+            using (Stream stream = File.Open(settingsFileName, FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                var binaryFormatter = new BinaryFormatter();
+                binaryFormatter.Serialize(stream, settings);
+            }
+        }
+
+        public SettingsModel LoadSettingsFromFile()
+        {
+            try
+            {
+                using (Stream stream = File.Open(settingsFileName, FileMode.Open))
+                {
+                    var binaryFormatter = new BinaryFormatter();
+                    return (SettingsModel)binaryFormatter.Deserialize(stream);
+                }
+            }
+            catch (Exception)
+            {
+                return new SettingsModel();
+            }
+        }
+
         public void SaveToFile(string fileName, List<TempData> dataList)
         {
             fileName = fileName.Split('.')[0];
