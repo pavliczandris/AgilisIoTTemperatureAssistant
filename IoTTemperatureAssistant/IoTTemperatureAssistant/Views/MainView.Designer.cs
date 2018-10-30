@@ -1,6 +1,6 @@
 ﻿namespace IoTTemperatureAssistant
 {
-    partial class Form1
+    partial class MainView
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.lbInsideTempLabel = new System.Windows.Forms.Label();
             this.lbInsideTemp = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
@@ -42,7 +43,14 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.btnSettings = new System.Windows.Forms.Button();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.lbCityLabel = new System.Windows.Forms.Label();
+            this.lbCity = new System.Windows.Forms.Label();
+            this.settingsModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lbInsideTempLabel
@@ -87,29 +95,29 @@
             // 
             // chart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart.Legends.Add(legend1);
             this.chart.Location = new System.Drawing.Point(48, 124);
             this.chart.Name = "chart";
-            series5.BorderWidth = 2;
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Color = System.Drawing.Color.Red;
-            series5.Legend = "Legend1";
-            series5.Name = "Inside";
-            series5.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-            series5.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            series6.BorderWidth = 2;
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Color = System.Drawing.Color.Blue;
-            series6.Legend = "Legend1";
-            series6.Name = "Outside";
-            series6.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-            this.chart.Series.Add(series5);
-            this.chart.Series.Add(series6);
+            series1.BorderWidth = 2;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Color = System.Drawing.Color.Red;
+            series1.Legend = "Legend1";
+            series1.Name = "Inside";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            series2.BorderWidth = 2;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Color = System.Drawing.Color.Blue;
+            series2.Legend = "Legend1";
+            series2.Name = "Outside";
+            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+            this.chart.Series.Add(series1);
+            this.chart.Series.Add(series2);
             this.chart.Size = new System.Drawing.Size(1154, 435);
             this.chart.TabIndex = 4;
             this.chart.Text = "chart1";
@@ -138,11 +146,50 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
-            // Form1
+            // btnSettings
+            // 
+            this.btnSettings.Location = new System.Drawing.Point(521, 18);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(75, 23);
+            this.btnSettings.TabIndex = 7;
+            this.btnSettings.Text = "Settings";
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
+            // lbCityLabel
+            // 
+            this.lbCityLabel.AutoSize = true;
+            this.lbCityLabel.Location = new System.Drawing.Point(741, 18);
+            this.lbCityLabel.Name = "lbCityLabel";
+            this.lbCityLabel.Size = new System.Drawing.Size(27, 13);
+            this.lbCityLabel.TabIndex = 9;
+            this.lbCityLabel.Text = "City:";
+            // 
+            // lbCity
+            // 
+            this.lbCity.AutoSize = true;
+            this.lbCity.Location = new System.Drawing.Point(795, 18);
+            this.lbCity.Name = "lbCity";
+            this.lbCity.Size = new System.Drawing.Size(0, 13);
+            this.lbCity.TabIndex = 10;
+            // 
+            // settingsModelBindingSource
+            // 
+            this.settingsModelBindingSource.DataSource = typeof(IoTTemperatureAssistant.Models.SettingsModel);
+            // 
+            // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1233, 588);
+            this.Controls.Add(this.lbCity);
+            this.Controls.Add(this.lbCityLabel);
+            this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.chart);
@@ -150,9 +197,12 @@
             this.Controls.Add(this.lbOutsideTempLabel);
             this.Controls.Add(this.lbInsideTemp);
             this.Controls.Add(this.lbInsideTempLabel);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "MainView";
+            this.Text = "Temperature Assistant";
             ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsModelBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,6 +219,11 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Button btnSettings;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.Label lbCity;
+        private System.Windows.Forms.Label lbCityLabel;
+        private System.Windows.Forms.BindingSource settingsModelBindingSource;
     }
 }
 

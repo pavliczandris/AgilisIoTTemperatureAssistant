@@ -1,23 +1,26 @@
 ﻿using IoTTemperatureAssistant.Models;
 using IoTTemperatureAssistant.Services;
+using IoTTemperatureAssistant.Views;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace IoTTemperatureAssistant
 {
-    public partial class Form1 : Form
+    public partial class MainView : Form
     {
         private TemperatureService tempService = new TemperatureService();
         private FileService fileService = new FileService();
 
+        public SettingsModel Settings { get; set; }
         public List<TempData> InsideDataList { get; set; }
         public List<TempData> OutsideDataList { get; set; }
 
-        public Form1()
+        public MainView()
         {
             InitializeComponent();
-
+            Settings = new SettingsModel { City = "Budapest" };
+            lbCity.Text = Settings.City;
             InsideDataList = new List<TempData>();
             OutsideDataList = new List<TempData>();
         }
@@ -45,6 +48,20 @@ namespace IoTTemperatureAssistant
         {
             InsideDataList = fileService.LoadFromFile("inside.csv");
             OutsideDataList = fileService.LoadFromFile("outside.csv");
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            using (var settingsForm = new SettingsView(Settings))
+            {
+                settingsForm.Settings = Settings;
+
+                if (settingsForm.ShowDialog(this) == DialogResult.OK)
+                {
+                    Settings = settingsForm.Settings;
+                    lbCity.Text = Settings.City;
+                }
+            }
         }
     }
 }
