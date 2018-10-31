@@ -48,6 +48,8 @@
             this.lbCityLabel = new System.Windows.Forms.Label();
             this.lbCity = new System.Windows.Forms.Label();
             this.settingsModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnTest = new System.Windows.Forms.Button();
+            this.lbTest = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsModelBindingSource)).BeginInit();
@@ -182,11 +184,31 @@
             // 
             this.settingsModelBindingSource.DataSource = typeof(IoTTemperatureAssistant.Models.SettingsModel);
             // 
+            // btnTest
+            // 
+            this.btnTest.Location = new System.Drawing.Point(1127, 21);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(75, 23);
+            this.btnTest.TabIndex = 11;
+            this.btnTest.Text = "Test";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
+            // lbTest
+            // 
+            this.lbTest.AutoSize = true;
+            this.lbTest.Location = new System.Drawing.Point(1156, 47);
+            this.lbTest.Name = "lbTest";
+            this.lbTest.Size = new System.Drawing.Size(0, 13);
+            this.lbTest.TabIndex = 12;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1233, 588);
+            this.Controls.Add(this.lbTest);
+            this.Controls.Add(this.btnTest);
             this.Controls.Add(this.lbCity);
             this.Controls.Add(this.lbCityLabel);
             this.Controls.Add(this.btnSettings);
@@ -224,6 +246,8 @@
         private System.Windows.Forms.Label lbCity;
         private System.Windows.Forms.Label lbCityLabel;
         private System.Windows.Forms.BindingSource settingsModelBindingSource;
+        private System.Windows.Forms.Button btnTest;
+        private System.Windows.Forms.Label lbTest;
     }
 }
 

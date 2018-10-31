@@ -3,10 +3,17 @@ namespace IoTTemperatureAssistant.Services
 {
     public class TemperatureService
     {
+        public WeatherApiService WeatherApiService { get; set; }
+
         private double insideActualTemp = 21;
         private double outsideActualTemp = 9;
 
         private Random rand = new Random();
+
+        public TemperatureService()
+        {
+            WeatherApiService = new WeatherApiService();
+        }
 
         public double GetInsideTempertaure()
         {
