@@ -8,11 +8,15 @@ namespace IoTTemperatureAssistant.Models
 {
     public class WeatherData
     {
-        public Main Value { get; set; } = new Main();
+        public class main
+        {
+            public double temp { get; set; }
+        }
+
+        public class root
+        {
+            public main main { get; set; }
+        }
     }
 
-    public class Main
-    {
-        public decimal Temp { get; set; }
-    }
 }

@@ -36,7 +36,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.lbInsideTempLabel = new System.Windows.Forms.Label();
             this.lbInsideTemp = new System.Windows.Forms.Label();
-            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.InsideTimer = new System.Windows.Forms.Timer(this.components);
             this.lbOutsideTempLabel = new System.Windows.Forms.Label();
             this.lbOutsideTemp = new System.Windows.Forms.Label();
             this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -47,9 +47,10 @@
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.lbCityLabel = new System.Windows.Forms.Label();
             this.lbCity = new System.Windows.Forms.Label();
-            this.settingsModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnTest = new System.Windows.Forms.Button();
             this.lbTest = new System.Windows.Forms.Label();
+            this.OutsideTimer = new System.Windows.Forms.Timer(this.components);
+            this.settingsModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsModelBindingSource)).BeginInit();
@@ -72,11 +73,11 @@
             this.lbInsideTemp.Size = new System.Drawing.Size(0, 13);
             this.lbInsideTemp.TabIndex = 1;
             // 
-            // timer
+            // InsideTimer
             // 
-            this.timer.Enabled = true;
-            this.timer.Interval = 1000;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.InsideTimer.Enabled = true;
+            this.InsideTimer.Interval = 150000;
+            this.InsideTimer.Tick += new System.EventHandler(this.InsideTimer_Tick);
             // 
             // lbOutsideTempLabel
             // 
@@ -180,10 +181,6 @@
             this.lbCity.Size = new System.Drawing.Size(0, 13);
             this.lbCity.TabIndex = 10;
             // 
-            // settingsModelBindingSource
-            // 
-            this.settingsModelBindingSource.DataSource = typeof(IoTTemperatureAssistant.Models.SettingsModel);
-            // 
             // btnTest
             // 
             this.btnTest.Location = new System.Drawing.Point(1127, 21);
@@ -201,6 +198,16 @@
             this.lbTest.Name = "lbTest";
             this.lbTest.Size = new System.Drawing.Size(0, 13);
             this.lbTest.TabIndex = 12;
+            // 
+            // OutsideTimer
+            // 
+            this.OutsideTimer.Enabled = true;
+            this.OutsideTimer.Interval = 300000;
+            this.OutsideTimer.Tick += new System.EventHandler(this.OutsideTimer_Tick);
+            // 
+            // settingsModelBindingSource
+            // 
+            this.settingsModelBindingSource.DataSource = typeof(IoTTemperatureAssistant.Models.SettingsModel);
             // 
             // MainView
             // 
@@ -234,7 +241,7 @@
 
         private System.Windows.Forms.Label lbInsideTempLabel;
         private System.Windows.Forms.Label lbInsideTemp;
-        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Timer InsideTimer;
         private System.Windows.Forms.Label lbOutsideTempLabel;
         private System.Windows.Forms.Label lbOutsideTemp;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart;
@@ -248,6 +255,7 @@
         private System.Windows.Forms.BindingSource settingsModelBindingSource;
         private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.Label lbTest;
+        private System.Windows.Forms.Timer OutsideTimer;
     }
 }
 

@@ -26,19 +26,37 @@ namespace IoTTemperatureAssistant
             lbCity.Text = Settings.City;
             InsideDataList = new List<TempData>();
             OutsideDataList = new List<TempData>();
+            NextInsideTemperature();
+            NextOutsideTemperature();
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void NextInsideTemperature()
         {
-            DateTime time = DateTime.Now;
-            var insideTemp = new TempData(time, tempService.GetInsideTempertaure());
-            var outsideTemp = new TempData(time, tempService.GetOutsideTempertaure());
+            var insideTemp = new TempData()
+            {
+                Time = DateTime.Now,
+                Temperature = tempService.GetInsideTempertaure()
+            };
             lbInsideTemp.Text = insideTemp.Temperature.ToString();
-            lbOutsideTemp.Text = outsideTemp.Temperature.ToString();
             InsideDataList.Add(insideTemp);
-            OutsideDataList.Add(outsideTemp);
             chart.Series["Inside"].Points.DataBind(InsideDataList, "Time", "Temperature", "");
+        }
+
+        private async void NextOutsideTemperature()
+        {
+            var outsideTemp = new TempData()
+            {
+                Time = DateTime.Now,
+                Temperature = await tempService.WeatherApiService.GetOutsideTemp(Settings.City)
+            };
+            lbOutsideTemp.Text = outsideTemp.Temperature.ToString();
+            OutsideDataList.Add(outsideTemp);
             chart.Series["Outside"].Points.DataBind(OutsideDataList, "Time", "Temperature", "");
+        }
+
+        private void InsideTimer_Tick(object sender, EventArgs e)
+        {
+            NextInsideTemperature();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -71,7 +89,13 @@ namespace IoTTemperatureAssistant
 
         private async void btnTest_Click(object sender, EventArgs e)
         {
-            lbTest.Text = (await tempService.WeatherApiService.GetOutsideTemp("Budapest")).ToString();
+            lbTest.Text = (await tempService.WeatherApiService.GetOutsideTemp(Settings.City)).ToString();
+            NextOutsideTemperature();
+        }
+
+        private void OutsideTimer_Tick(object sender, EventArgs e)
+        {
+            NextOutsideTemperature();
         }
     }
 }

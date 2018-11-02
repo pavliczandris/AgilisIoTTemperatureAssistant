@@ -15,7 +15,7 @@ namespace IoTTemperatureAssistant.Services
         private readonly string baseUrl = "http://api.openweathermap.org/data/2.5/weather";
         private readonly string appID = "ee4e9a3c11553b7c44b138fd3629f496";
 
-        public async Task<decimal> GetOutsideTemp(string cityName)
+        public async Task<double> GetOutsideTemp(string cityName)
         {
             string apiPath = $"{baseUrl}?q={cityName}&APPID={appID}";
             HttpWebRequest request = WebRequest.Create(apiPath) as HttpWebRequest;
@@ -27,11 +27,11 @@ namespace IoTTemperatureAssistant.Services
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     string jsonResult = reader.ReadToEnd();
-                    var weatherData = JsonConvert.DeserializeObject<WeatherData>(jsonResult);
-                    return weatherData.Value.Temp - (decimal)273.15;
+                    var weatherData = JsonConvert.DeserializeObject<WeatherData.root>(jsonResult);
+                    return weatherData.main.temp - 273.15;
                 }
             }
-            return default(decimal);
+            return default(double);
         }
     }
 }
