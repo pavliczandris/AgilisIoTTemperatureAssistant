@@ -86,13 +86,7 @@ namespace IoTTemperatureAssistant
                 }
             }
         }
-
-        private async void btnTest_Click(object sender, EventArgs e)
-        {
-            lbTest.Text = (await tempService.WeatherApiService.GetOutsideTemp(Settings.City)).ToString();
-            NextOutsideTemperature();
-        }
-
+               
         private void OutsideTimer_Tick(object sender, EventArgs e)
         {
             NextOutsideTemperature();
