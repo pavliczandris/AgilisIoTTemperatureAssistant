@@ -1,11 +1,8 @@
 ﻿using IoTTemperatureAssistant.Models;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace IoTTemperatureAssistant.Services
@@ -17,19 +14,30 @@ namespace IoTTemperatureAssistant.Services
 
         public async Task<double> GetOutsideTemp(string cityName)
         {
+            if (cityName == null || cityName == "")
+                return default(double);
+
             string apiPath = $"{baseUrl}?q={cityName}&APPID={appID}";
             HttpWebRequest request = WebRequest.Create(apiPath) as HttpWebRequest;
             request.ContentType = "application/json";
-            var response = await request.GetResponseAsync() as HttpWebResponse;
-            if (response.StatusCode == HttpStatusCode.OK)
+            try
             {
-                using (Stream stream = response.GetResponseStream())
-                using (StreamReader reader = new StreamReader(stream))
+                var response = await request.GetResponseAsync() as HttpWebResponse;
+                if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    string jsonResult = reader.ReadToEnd();
-                    var weatherData = JsonConvert.DeserializeObject<WeatherData.root>(jsonResult);
-                    return weatherData.main.temp - 273.15;
+                    using (Stream stream = response.GetResponseStream())
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        string jsonResult = reader.ReadToEnd();
+                        var weatherData = JsonConvert.DeserializeObject<WeatherData.root>(jsonResult);
+                        return weatherData.main.temp - 273.15;
+                    }
                 }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return default(double);
             }
             return default(double);
         }
