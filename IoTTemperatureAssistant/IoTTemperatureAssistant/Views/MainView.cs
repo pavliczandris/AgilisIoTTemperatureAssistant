@@ -15,7 +15,7 @@ namespace IoTTemperatureAssistant
         public SettingsModel Settings { get; set; }
         public List<TempData> InsideDataList { get; set; }
         public List<TempData> OutsideDataList { get; set; }
-
+        private TemperatureCalculator TCalc = new TemperatureCalculator();
         public MainView()
         {
             InitializeComponent();
@@ -90,6 +90,11 @@ namespace IoTTemperatureAssistant
         private void OutsideTimer_Tick(object sender, EventArgs e)
         {
             NextOutsideTemperature();
+        }
+
+        private void MainView_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

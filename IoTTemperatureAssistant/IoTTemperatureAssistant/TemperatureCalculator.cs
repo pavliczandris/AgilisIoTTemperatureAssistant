@@ -8,19 +8,29 @@ namespace IoTTemperatureAssistant
 {
     public class TemperatureCalculator
     {
+        private double volumeOfRoom         { get; set; }   // Szoba térfogata
+        private double enerGyPricing        { get; set; }   // Energia árfolyama
+        private double outdoorTemperature   { get; set; }   // Külső hőmérséklet
+        private double indoorTemperature    { get; set; }   //Belső hőmérséklet
+        private double goodnessFactor       { get; set; }   // Jóségi tényező a bel- és kültér közötti fal szigetelésére. 1=teljesen szigetel; 0=teljesen átadja a hőt
+        private double surfaceOfWall        { get; set; }   // Bel, és külteret elválasztó falak összfelülete
 
-        private double volumeOfRoom         { get; set; }
-        private double enerGyPricing        { get; set; }
-        private double outdoorTemperature   { get; set; }
-        private double indoorTemperature    { get; set; }
-        private double goodnessFactor       { get; set; }
+        public TemperatureCalculator()
+        {
+            volumeOfRoom = 0;
+            enerGyPricing = 0;
+            outdoorTemperature = 0;
+            indoorTemperature = 0;
+            goodnessFactor = 1;
+            surfaceOfWall = 0;
+        }
 
         public double TemperatureDifference()   // Belső és külső hőmérséklet közti különbség számítása
         {
-            return 0;
+            return indoorTemperature-outdoorTemperature;
         }
 
-        public double EnergyToMaintain()        // Jelenlegi hőmérséklet fenntartásához szükséges energia, arra számítva, hogy a hőmérséklet azonos marad a jelenlegivel
+        public double EnergyToMaintain()        // Jelenlegi hőmérséklet fenntartásához szükséges energia, arra számítva, hogy a hőmérséklet azonos marad a jelenlegivel.
         {
             return 0;
         }
@@ -30,14 +40,15 @@ namespace IoTTemperatureAssistant
             return 0;
         }
 
-        public double PriceToMaintain()         // Jelenlegi hőmérséklet fenntartásából adódó költség a hónapra
+        public double PriceToMaintain()                    // Jelenlegi hőmérséklet fenntartásából adódó költség a hónapra
         {
-            return 0;
+            return enerGyPricing * EnergyToMaintain();
         } 
 
-        public double PriceToChange(double valueOfChange)           // A hőmérsékletváltoztatásából adódó költség egyszeri hőmérsékletváltoztatásnál.
+        public double PriceToChange(double valueOfChange)  // A hőmérsékletváltoztatásából adódó költség egyszeri hőmérsékletváltoztatásnál.
         {
-            return 0;
+            return enerGyPricing*EnergyToChange(valueOfChange);
         }
+
     }
 }

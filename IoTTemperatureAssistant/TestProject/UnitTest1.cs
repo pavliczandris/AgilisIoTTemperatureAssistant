@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IoTTemperatureAssistant;
 
-namespace TestProject
+namespace Test
 {
     [TestClass]
     public class UnitTest1
