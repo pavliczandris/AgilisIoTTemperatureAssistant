@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using IoTTemperatureAssistant.Models;
 
 namespace IoTTemperatureAssistant.Services
@@ -7,11 +8,14 @@ namespace IoTTemperatureAssistant.Services
     {
         public WeatherApiService WeatherApiService { get; set; }
 
-        private double insideActualTemp = 21;
-        private double outsideActualTemp = 9;
+        public double insideActualTemp = 21;
+        public double outsideActualTemp = 9;
+
+        private double averageInsideTemperature;
+        private double averageOutsideTemperature;
 
         private Random rand = new Random();
-        private double energyInMonth=0;
+        public double energyInMonth=0;
 
         public TemperatureService()
         {
@@ -51,15 +55,24 @@ namespace IoTTemperatureAssistant.Services
             }
         }
 
-        public double CountConsumption(SettingsModel SM)        // A hónap eddigi energiafogyasztásának számítása
+        public double countAverage(List<double> TempList)
         {
-            return 0;
+            double average=0;
+            for (int i=0; i<TempList.Count;i++)
+            {
+                average = average + (TempList[i] /TempList.Count);
+            }
+            return average;
         }
 
-        private double CountPrice(SettingsModel SM)             // A hónap eddigi energiaköltségei
+        public double CountConsumption(SettingsModel SM)        // A hónap eddigi energiafogyasztásának számítása
         {
-            return energyInMonth*SM.EnergyPricing;
+            return SM.HeatConduction*((insideActualTemp-outsideActualTemp)/(SM.ThicknessOfWall))*SM.SurfaceOfWall*24*3600;
+        }
 
+        public double CountPrice(SettingsModel SM)             // A hónap eddigi energiaköltségei
+        {
+            return CountConsumption(SM)*SM.EnergyPricing/(3.6e+9);
         }
 
         public double EnergyPrediction(SettingsModel SM)                      // Jelenlegi hőmérséklet fenntartásához szükséges energia becslése, arra számítva, hogy a hőmérséklet azonos marad a jelenlegivel a hónap végéig.
