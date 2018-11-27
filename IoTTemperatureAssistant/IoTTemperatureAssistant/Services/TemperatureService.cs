@@ -1,4 +1,6 @@
 ﻿using System;
+using IoTTemperatureAssistant.Models;
+
 namespace IoTTemperatureAssistant.Services
 {
     public class TemperatureService
@@ -9,6 +11,7 @@ namespace IoTTemperatureAssistant.Services
         private double outsideActualTemp = 9;
 
         private Random rand = new Random();
+        private double energyInMonth=0;
 
         public TemperatureService()
         {
@@ -46,6 +49,32 @@ namespace IoTTemperatureAssistant.Services
                     return value;
                 return value + 0.1;
             }
+        }
+
+        public double CountConsumption(SettingsModel SM)        // A hónap eddigi energiafogyasztásának számítása
+        {
+            return 0;
+        }
+
+        private double CountPrice(SettingsModel SM)             // A hónap eddigi energiaköltségei
+        {
+            return energyInMonth*SM.EnergyPricing;
+
+        }
+
+        public double EnergyPrediction(SettingsModel SM)                      // Jelenlegi hőmérséklet fenntartásához szükséges energia becslése, arra számítva, hogy a hőmérséklet azonos marad a jelenlegivel a hónap végéig.
+        {
+            return 0;
+        }
+
+        public double PricePrediction(SettingsModel SM)                       // Jelenlegi hőmérséklet fenntartásából adódó költség becslése a hónapra
+        {
+            return EnergyPrediction(SM)*SM.EnergyPricing;
+        }
+
+        public double savingPrediction(SettingsModel SM, double valueOfChange)   // A hőmérsékletváltoztatásából adódó költségmegtakarítás becslése.
+        {
+            return 0;
         }
     }
 }

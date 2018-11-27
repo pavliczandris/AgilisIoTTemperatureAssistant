@@ -26,5 +26,10 @@ namespace IoTTemperatureAssistant.Views
                 Size = nuSize.Value
             };
         }
+
+        private void SettingsView_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -157,6 +157,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsView";
             this.Text = "SettingsView";
+            this.Load += new System.EventHandler(this.SettingsView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nuSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuHeight)).EndInit();
             this.ResumeLayout(false);

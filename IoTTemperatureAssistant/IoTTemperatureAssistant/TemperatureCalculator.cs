@@ -8,27 +8,17 @@ namespace IoTTemperatureAssistant
 {
     public class TemperatureCalculator
     {
-        private double volumeOfRoom         { get; set; }   // Szoba térfogata
-        private double enerGyPricing        { get; set; }   // Energia árfolyama
-        private double outdoorTemperature   { get; set; }   // Külső hőmérséklet
-        private double indoorTemperature    { get; set; }   //Belső hőmérséklet
-        private double goodnessFactor       { get; set; }   // Jóségi tényező a bel- és kültér közötti fal szigetelésére. 1=teljesen szigetel; 0=teljesen átadja a hőt
-        private double surfaceOfWall        { get; set; }   // Bel, és külteret elválasztó falak összfelülete
+        private double VolumeOfRoom         { get; set; }   // Szoba térfogata
+        private double EnergyPricing        { get; set; }   // Energia árfolyama
+        private double OutdoorTemperature   { get; set; }   // Külső hőmérséklet
+        private double IndoorTemperature    { get; set; }   //Belső hőmérséklet
+        private double HeatConduction       { get; set; }   // Jóségi tényező a bel- és kültér közötti fal szigetelésére. 1=teljesen szigetel; 0=teljesen átadja a hőt
+        private double SurfaceOfWall        { get; set; }   // Bel, és külteret elválasztó falak összfelülete
 
-        public TemperatureCalculator()
+        /*public double TemperatureDifference()   // Belső és külső hőmérséklet közti különbség számítása
         {
-            volumeOfRoom = 0;
-            enerGyPricing = 0;
-            outdoorTemperature = 0;
-            indoorTemperature = 0;
-            goodnessFactor = 1;
-            surfaceOfWall = 0;
-        }
-
-        public double TemperatureDifference()   // Belső és külső hőmérséklet közti különbség számítása
-        {
-            return indoorTemperature-outdoorTemperature;
-        }
+            //return indoorTemperature-outdoorTemperature;
+        }*/
 
         public double EnergyToMaintain()        // Jelenlegi hőmérséklet fenntartásához szükséges energia, arra számítva, hogy a hőmérséklet azonos marad a jelenlegivel.
         {
@@ -42,12 +32,12 @@ namespace IoTTemperatureAssistant
 
         public double PriceToMaintain()                    // Jelenlegi hőmérséklet fenntartásából adódó költség a hónapra
         {
-            return enerGyPricing * EnergyToMaintain();
+            return EnergyPricing * EnergyToMaintain();
         } 
 
         public double PriceToChange(double valueOfChange)  // A hőmérsékletváltoztatásából adódó költség egyszeri hőmérsékletváltoztatásnál.
         {
-            return enerGyPricing*EnergyToChange(valueOfChange);
+            return EnergyPricing*EnergyToChange(valueOfChange);
         }
 
     }

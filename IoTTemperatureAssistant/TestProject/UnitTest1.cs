@@ -1,6 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IoTTemperatureAssistant;
+using IoTTemperatureAssistant.Models;
+using IoTTemperatureAssistant.Services;
+
 
 namespace Test
 {
@@ -9,31 +12,54 @@ namespace Test
     {
 
         [TestMethod]
-        public void TempDiffTests() // Hőmérsékletkülönbség számításához teszt.
+        public void MaintainEnergyTest()                // Teszt a hőmérséklet fenntartásához szükséges energiát számító függvényhez.
         {
-            double expectedDiff =0;
-            TemperatureCalculator tc = new TemperatureCalculator();
-            Assert.AreEqual(expectedDiff, tc.TemperatureDifference());
+            double expectedEnergy = 0;
+            long secondsTilMonthsEnd = (DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month) * 24 * 3600);
+            SettingsModel TestSettings = new SettingsModel();
+            // Paraméterek beállítása
+
+            //
+            TemperatureService TestService = new TemperatureService();
+           // Assert.AreEqual(expectedEnergy, TestService.EnergyToMaintain(TestSettings));
         }
 
         [TestMethod]
-        public void MaintainTests() // Tesztek a fenntartáshoz szükséges energia és költség számításához
+        public void MaintainPriceTests()               // Tesztek a fenntartáshoz szükséges költség számításához.
         {
-            double expectedEnergy = 0;
             double expectedPrice = 0;
-            TemperatureCalculator tc = new TemperatureCalculator();
-            Assert.AreEqual(expectedEnergy,tc.EnergyToMaintain());
-            Assert.AreEqual(expectedPrice,tc.PriceToMaintain());
+
+            SettingsModel TestSettings = new SettingsModel();
+            // Paraméterek
+            //
+            TemperatureService TestService = new TemperatureService();
+
+//            Assert.AreEqual(expectedPrice,);
         }
 
         [TestMethod]
-        public void ChangeAndMaintainTests()   // Tesztek a hőmérséklet változtatásához és megtartásához szükséges energia és költség számításáshoz
+        public void ChangeAndMaintainEnergyTests()    // Tesztek a hőmérséklet változtatásához és megtartásához szükséges energia számításáshoz.
         {
             double expectedEnergy = 0;
+
+            SettingsModel TestSettings = new SettingsModel();
+            // Paraméterek
+            //
+            TemperatureService TestService = new TemperatureService();
+
+        //    Assert.AreEqual(expectedEnergy, );
+        }
+
+        [TestMethod]
+        public void ChangeAndMaintainPriceTes()     // Teszt a hőmérséklet változtatásához és annak megtartásához szükséges költség számításához.
+        {
             double expectedPrice = 0;
-            TemperatureCalculator tc = new TemperatureCalculator();
-            Assert.AreEqual(expectedEnergy, tc.EnergyToChange(0));
-            Assert.AreEqual(expectedPrice, tc.PriceToChange(0));
+
+            SettingsModel TestSettings = new SettingsModel();
+            // Paraméterek
+            //
+            TemperatureService TestService = new TemperatureService();
+          //  Assert.AreEqual(expectedPrice,);
         }
     }
 }
