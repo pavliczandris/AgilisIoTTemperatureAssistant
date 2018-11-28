@@ -11,9 +11,6 @@ namespace IoTTemperatureAssistant.Services
         public double insideActualTemp = 21;
         public double outsideActualTemp = 9;
 
-        private double averageInsideTemperature;
-        private double averageOutsideTemperature;
-
         private Random rand = new Random();
         public double energyInMonth=0;
 
@@ -65,29 +62,34 @@ namespace IoTTemperatureAssistant.Services
             return average;
         }
 
-        public double CountConsumption(SettingsModel SM)        // A hónap eddigi energiafogyasztásának számítása
+        public double CountConsumption(SettingsModel SM, List<double> InTemp, List<double> OutTemp)        // A hónap eddigi energiafogyasztásának számítása
         {
-            return SM.HeatConduction*((insideActualTemp-outsideActualTemp)/(SM.ThicknessOfWall))*SM.SurfaceOfWall*24*3600;
+            return SM.HeatConduction*((countAverage(InTemp)-countAverage(OutTemp))/(SM.ThicknessOfWall))*SM.SurfaceOfWall*24*3600;
         }
 
-        public double CountPrice(SettingsModel SM)             // A hónap eddigi energiaköltségei
+        public double CountPrice(SettingsModel SM, List<double> InTemp, List<double> OutTemp)             // A hónap eddigi energiaköltségei
         {
-            return CountConsumption(SM)*SM.EnergyPricing/(3.6e+9);
+            return CountConsumption(SM, InTemp, OutTemp)*SM.EnergyPricing/(3.6e+9);
         }
 
-        public double EnergyPrediction(SettingsModel SM)                      // Jelenlegi hőmérséklet fenntartásához szükséges energia becslése, arra számítva, hogy a hőmérséklet azonos marad a jelenlegivel a hónap végéig.
+        public double EnergyPrediction(SettingsModel SM, List<double> InTemp, List<double> OutTemp)                      // Jelenlegi hőmérséklet fenntartásához szükséges energia becslése, arra számítva, hogy a hőmérséklet azonos marad a jelenlegivel a hónap végéig.
         {
-            return 0;
+            double Energydt = SM.HeatConduction * ((countAverage(InTemp) - countAverage(OutTemp)) / (SM.ThicknessOfWall)) * SM.SurfaceOfWall;
+            long TimeTilMonthsEnd = (DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month) - (DateTime.Today.Day - 1)) * 24 * 3600;
+            return Energydt * TimeTilMonthsEnd;
         }
 
-        public double PricePrediction(SettingsModel SM)                       // Jelenlegi hőmérséklet fenntartásából adódó költség becslése a hónapra
+        public double PricePrediction(SettingsModel SM, List<double> InTemp, List<double> OutTemp)                       // Jelenlegi hőmérséklet fenntartásából adódó költség becslése a hónapra
         {
-            return EnergyPrediction(SM)*SM.EnergyPricing;
+            return EnergyPrediction(SM, InTemp, OutTemp) *SM.EnergyPricing/(3.6e+9);
         }
 
-        public double savingPrediction(SettingsModel SM, double valueOfChange)   // A hőmérsékletváltoztatásából adódó költségmegtakarítás becslése.
+        public double savingPrediction(SettingsModel SM, double valueOfChange, List<double> InTemp, List<double> OutTemp)   // A hőmérsékletváltoztatásából adódó költségmegtakarítás becslése.
         {
-            return 0;
+            double ChangedEnergydt = SM.HeatConduction * ((countAverage(InTemp) - countAverage(OutTemp) + valueOfChange) / (SM.ThicknessOfWall)) * SM.SurfaceOfWall;
+            long TimeTilMonthsEnd = (DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month) - (DateTime.Today.Day - 1)) * 24 * 3600;
+            double energySavings = EnergyPrediction(SM, InTemp, OutTemp) - (ChangedEnergydt*TimeTilMonthsEnd);
+            return energySavings*SM.EnergyPricing/(3.6e+9);
         }
     }
 }
