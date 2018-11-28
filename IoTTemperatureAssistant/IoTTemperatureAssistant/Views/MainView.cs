@@ -119,5 +119,22 @@ namespace IoTTemperatureAssistant
             lbEstimatedCost.Text = tempService.PricePrediction(Settings, insideTemp, outsideTemp).ToString();
 
         }
+
+        private void nuTempChange_ValueChanged(object sender, EventArgs e)
+        {
+            var insideTemp = new List<double>();
+            foreach (var item in InsideDataList)
+            {
+                insideTemp.Add(item.Temperature);
+            }
+            lbAvgInsideTemp.Text = Math.Round(tempService.countAverage(insideTemp)).ToString();
+
+            var outsideTemp = new List<double>();
+            foreach (var item in OutsideDataList)
+            {
+                outsideTemp.Add(item.Temperature);
+            }
+            lbSavingPrediction.Text = Math.Round(tempService.savingPrediction(Settings, (double)nuTempChange.Value, insideTemp, outsideTemp)).ToString();
+        }
     }
 }

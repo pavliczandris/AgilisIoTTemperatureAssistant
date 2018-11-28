@@ -44,11 +44,13 @@
             this.lbCity = new System.Windows.Forms.Label();
             this.OutsideTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.nuTempChange = new System.Windows.Forms.NumericUpDown();
             this.lbEstimatedCost = new System.Windows.Forms.Label();
             this.lbEstimatedConsumption = new System.Windows.Forms.Label();
             this.lbAvgOutsideTemp = new System.Windows.Forms.Label();
-            this.lbOutsideTemp = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbSavingPrediction = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -61,11 +63,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbInsideTemp = new System.Windows.Forms.Label();
             this.lbInsideTempLabel = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.CalculationTimer = new System.Windows.Forms.Timer(this.components);
             this.settingsModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lbOutsideTemp = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nuTempChange)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,7 +115,7 @@
             this.btnSave.Location = new System.Drawing.Point(72, 36);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(81, 44);
+            this.btnSave.Size = new System.Drawing.Size(81, 30);
             this.btnSave.TabIndex = 5;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -121,7 +126,7 @@
             this.btnLoad.Location = new System.Drawing.Point(174, 36);
             this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(81, 44);
+            this.btnLoad.Size = new System.Drawing.Size(81, 30);
             this.btnLoad.TabIndex = 6;
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
@@ -133,10 +138,10 @@
             // 
             // btnSettings
             // 
-            this.btnSettings.Location = new System.Drawing.Point(72, 116);
+            this.btnSettings.Location = new System.Drawing.Point(72, 88);
             this.btnSettings.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(183, 42);
+            this.btnSettings.Size = new System.Drawing.Size(183, 31);
             this.btnSettings.TabIndex = 7;
             this.btnSettings.Text = "Settings";
             this.btnSettings.UseVisualStyleBackColor = true;
@@ -150,7 +155,7 @@
             // lbCity
             // 
             this.lbCity.AutoSize = true;
-            this.lbCity.Location = new System.Drawing.Point(121, 24);
+            this.lbCity.Location = new System.Drawing.Point(139, 146);
             this.lbCity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCity.Name = "lbCity";
             this.lbCity.Size = new System.Drawing.Size(0, 20);
@@ -165,11 +170,13 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.nuTempChange);
             this.panel1.Controls.Add(this.lbEstimatedCost);
             this.panel1.Controls.Add(this.lbEstimatedConsumption);
             this.panel1.Controls.Add(this.lbAvgOutsideTemp);
-            this.panel1.Controls.Add(this.lbOutsideTemp);
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.lbSavingPrediction);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label5);
@@ -179,8 +186,8 @@
             this.panel1.Controls.Add(this.lbAvgInsideTemp);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.lbCity);
             this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.lbOutsideTemp);
             this.panel1.Controls.Add(this.lbInsideTemp);
             this.panel1.Controls.Add(this.lbInsideTempLabel);
             this.panel1.Location = new System.Drawing.Point(280, 36);
@@ -188,10 +195,30 @@
             this.panel1.Size = new System.Drawing.Size(1523, 130);
             this.panel1.TabIndex = 11;
             // 
+            // nuTempChange
+            // 
+            this.nuTempChange.DecimalPlaces = 2;
+            this.nuTempChange.Location = new System.Drawing.Point(219, 22);
+            this.nuTempChange.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nuTempChange.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+            this.nuTempChange.Minimum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            -2147483648});
+            this.nuTempChange.Name = "nuTempChange";
+            this.nuTempChange.Size = new System.Drawing.Size(93, 26);
+            this.nuTempChange.TabIndex = 20;
+            this.nuTempChange.ValueChanged += new System.EventHandler(this.nuTempChange_ValueChanged);
+            // 
             // lbEstimatedCost
             // 
             this.lbEstimatedCost.AutoSize = true;
-            this.lbEstimatedCost.Location = new System.Drawing.Point(1420, 91);
+            this.lbEstimatedCost.Location = new System.Drawing.Point(1420, 80);
             this.lbEstimatedCost.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbEstimatedCost.Name = "lbEstimatedCost";
             this.lbEstimatedCost.Size = new System.Drawing.Size(0, 20);
@@ -209,30 +236,40 @@
             // lbAvgOutsideTemp
             // 
             this.lbAvgOutsideTemp.AutoSize = true;
-            this.lbAvgOutsideTemp.Location = new System.Drawing.Point(803, 80);
+            this.lbAvgOutsideTemp.Location = new System.Drawing.Point(862, 80);
             this.lbAvgOutsideTemp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbAvgOutsideTemp.Name = "lbAvgOutsideTemp";
             this.lbAvgOutsideTemp.Size = new System.Drawing.Size(0, 20);
             this.lbAvgOutsideTemp.TabIndex = 15;
             // 
-            // lbOutsideTemp
+            // lbSavingPrediction
             // 
-            this.lbOutsideTemp.AutoSize = true;
-            this.lbOutsideTemp.Location = new System.Drawing.Point(460, 80);
-            this.lbOutsideTemp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbOutsideTemp.Name = "lbOutsideTemp";
-            this.lbOutsideTemp.Size = new System.Drawing.Size(0, 20);
-            this.lbOutsideTemp.TabIndex = 15;
+            this.lbSavingPrediction.AutoSize = true;
+            this.lbSavingPrediction.Location = new System.Drawing.Point(215, 80);
+            this.lbSavingPrediction.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbSavingPrediction.Name = "lbSavingPrediction";
+            this.lbSavingPrediction.Size = new System.Drawing.Size(0, 20);
+            this.lbSavingPrediction.TabIndex = 15;
             // 
-            // label2
+            // label3
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 24);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 20);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "City:";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(20, 24);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(191, 20);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Temperature change (°C):";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(20, 80);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(182, 20);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Saving prediction (HUF):";
             // 
             // label14
             // 
@@ -257,7 +294,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(546, 80);
+            this.label5.Location = new System.Drawing.Point(605, 80);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(249, 20);
@@ -285,7 +322,7 @@
             // lbOutsideTempLabel
             // 
             this.lbOutsideTempLabel.AutoSize = true;
-            this.lbOutsideTempLabel.Location = new System.Drawing.Point(263, 80);
+            this.lbOutsideTempLabel.Location = new System.Drawing.Point(322, 80);
             this.lbOutsideTempLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbOutsideTempLabel.Name = "lbOutsideTempLabel";
             this.lbOutsideTempLabel.Size = new System.Drawing.Size(189, 20);
@@ -295,7 +332,7 @@
             // lbAvgInsideTemp
             // 
             this.lbAvgInsideTemp.AutoSize = true;
-            this.lbAvgInsideTemp.Location = new System.Drawing.Point(802, 24);
+            this.lbAvgInsideTemp.Location = new System.Drawing.Point(861, 24);
             this.lbAvgInsideTemp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbAvgInsideTemp.Name = "lbAvgInsideTemp";
             this.lbAvgInsideTemp.Size = new System.Drawing.Size(0, 20);
@@ -324,7 +361,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(546, 24);
+            this.label1.Location = new System.Drawing.Point(605, 24);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(238, 20);
@@ -334,7 +371,7 @@
             // lbInsideTemp
             // 
             this.lbInsideTemp.AutoSize = true;
-            this.lbInsideTemp.Location = new System.Drawing.Point(460, 24);
+            this.lbInsideTemp.Location = new System.Drawing.Point(519, 24);
             this.lbInsideTemp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbInsideTemp.Name = "lbInsideTemp";
             this.lbInsideTemp.Size = new System.Drawing.Size(0, 20);
@@ -343,12 +380,22 @@
             // lbInsideTempLabel
             // 
             this.lbInsideTempLabel.AutoSize = true;
-            this.lbInsideTempLabel.Location = new System.Drawing.Point(263, 24);
+            this.lbInsideTempLabel.Location = new System.Drawing.Point(322, 24);
             this.lbInsideTempLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbInsideTempLabel.Name = "lbInsideTempLabel";
             this.lbInsideTempLabel.Size = new System.Drawing.Size(177, 20);
             this.lbInsideTempLabel.TabIndex = 12;
             this.lbInsideTempLabel.Text = "Inside temperature (°C):";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(80, 146);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(39, 20);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "City:";
             // 
             // CalculationTimer
             // 
@@ -360,6 +407,15 @@
             // 
             this.settingsModelBindingSource.DataSource = typeof(IoTTemperatureAssistant.Models.SettingsModel);
             // 
+            // lbOutsideTemp
+            // 
+            this.lbOutsideTemp.AutoSize = true;
+            this.lbOutsideTemp.Location = new System.Drawing.Point(519, 80);
+            this.lbOutsideTemp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbOutsideTemp.Name = "lbOutsideTemp";
+            this.lbOutsideTemp.Size = new System.Drawing.Size(0, 20);
+            this.lbOutsideTemp.TabIndex = 13;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -370,6 +426,8 @@
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.chart);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbCity);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainView";
@@ -379,8 +437,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nuTempChange)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsModelBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -399,7 +459,7 @@
         private System.Windows.Forms.Label lbEstimatedCost;
         private System.Windows.Forms.Label lbEstimatedConsumption;
         private System.Windows.Forms.Label lbAvgOutsideTemp;
-        private System.Windows.Forms.Label lbOutsideTemp;
+        private System.Windows.Forms.Label lbSavingPrediction;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label10;
@@ -414,6 +474,10 @@
         private System.Windows.Forms.Label lbInsideTemp;
         private System.Windows.Forms.Label lbInsideTempLabel;
         private System.Windows.Forms.Timer CalculationTimer;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown nuTempChange;
+        private System.Windows.Forms.Label lbOutsideTemp;
     }
 }
 
