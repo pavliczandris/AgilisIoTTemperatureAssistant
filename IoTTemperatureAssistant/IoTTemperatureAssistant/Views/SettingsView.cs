@@ -15,6 +15,10 @@ namespace IoTTemperatureAssistant.Views
             tbCity.Text = Settings.City;
             nuSize.Value = Settings.Size;
             nuHeight.Value = Settings.Height;
+            nuEnergyPricing.Value = (decimal)Settings.EnergyPricing;
+            nuHeatConduction.Value = (decimal)Settings.HeatConduction;
+            nuSurfaceOfWall.Value = (decimal)Settings.SurfaceOfWall;
+            nuThicknessOfWall.Value = (decimal)Settings.ThicknessOfWall;
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -23,7 +27,11 @@ namespace IoTTemperatureAssistant.Views
             {
                 City = tbCity.Text,
                 Height = nuHeight.Value,
-                Size = nuSize.Value
+                Size = nuSize.Value,
+                EnergyPricing = (double)nuEnergyPricing.Value,
+                HeatConduction = (double)nuHeatConduction.Value,
+                SurfaceOfWall = (double)nuSurfaceOfWall.Value,
+                ThicknessOfWall = (double)nuThicknessOfWall.Value
             };
         }
 

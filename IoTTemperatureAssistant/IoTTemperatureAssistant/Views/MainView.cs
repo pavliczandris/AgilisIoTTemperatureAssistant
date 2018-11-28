@@ -103,17 +103,17 @@ namespace IoTTemperatureAssistant
             {
                 insideTemp.Add(item.Temperature);
             }
-            lbAvgInsideTemp.Text = tempService.countAverage(insideTemp).ToString();
+            lbAvgInsideTemp.Text = Math.Round(tempService.countAverage(insideTemp)).ToString();
 
             var outsideTemp = new List<double>();
             foreach (var item in OutsideDataList)
             {
                 outsideTemp.Add(item.Temperature);
             }
-            lbAvgOutsideTemp.Text = tempService.countAverage(outsideTemp).ToString();
+            lbAvgOutsideTemp.Text = Math.Round(tempService.countAverage(outsideTemp)).ToString();
 
-            lbConsumption.Text = tempService.CountConsumption(Settings, insideTemp, outsideTemp).ToString();
-            lbEstimatedConsumption.Text = tempService.EnergyPrediction(Settings, insideTemp, outsideTemp).ToString();
+            lbConsumption.Text = (tempService.CountConsumption(Settings, insideTemp, outsideTemp) / 1000000).ToString();
+            lbEstimatedConsumption.Text = (tempService.EnergyPrediction(Settings, insideTemp, outsideTemp) / 1000000).ToString();
 
             lbCost.Text = tempService.CountPrice(Settings, insideTemp, outsideTemp).ToString();
             lbEstimatedCost.Text = tempService.PricePrediction(Settings, insideTemp, outsideTemp).ToString();
