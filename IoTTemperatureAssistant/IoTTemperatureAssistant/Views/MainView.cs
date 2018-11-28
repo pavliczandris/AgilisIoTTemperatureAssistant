@@ -15,7 +15,6 @@ namespace IoTTemperatureAssistant
         public SettingsModel Settings { get; set; }
         public List<TempData> InsideDataList { get; set; }
         public List<TempData> OutsideDataList { get; set; }
-        private TemperatureCalculator TCalc = new TemperatureCalculator();
         public MainView()
         {
             InitializeComponent();

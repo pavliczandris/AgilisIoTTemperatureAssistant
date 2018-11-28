@@ -53,7 +53,6 @@
     <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Models\WeatherData.cs" />
     <Compile Include="Services\WeatherApiService.cs" />
-    <Compile Include="TemperatureCalculator.cs" />
     <Compile Include="Views\MainView.cs">
       <SubType>Form</SubType>
     </Compile>

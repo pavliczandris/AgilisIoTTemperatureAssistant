@@ -8,11 +8,10 @@ namespace IoTTemperatureAssistant.Services
     {
         public WeatherApiService WeatherApiService { get; set; }
 
-        public double insideActualTemp = 21;
-        public double outsideActualTemp = 9;
+        private double insideActualTemp = 21;
+        private double outsideActualTemp = 9;
 
         private Random rand = new Random();
-        public double energyInMonth=0;
 
         public TemperatureService()
         {
