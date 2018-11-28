@@ -74,7 +74,7 @@
             // InsideTimer
             // 
             this.InsideTimer.Enabled = true;
-            this.InsideTimer.Interval = 150000;
+            this.InsideTimer.Interval = 1500;
             this.InsideTimer.Tick += new System.EventHandler(this.InsideTimer_Tick);
             // 
             // lbOutsideTempLabel
