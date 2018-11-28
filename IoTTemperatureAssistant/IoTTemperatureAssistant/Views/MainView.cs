@@ -95,5 +95,29 @@ namespace IoTTemperatureAssistant
         {
 
         }
+
+        private void CalculationTimer_Tick(object sender, EventArgs e)
+        {
+            var insideTemp = new List<double>();
+            foreach (var item in InsideDataList)
+            {
+                insideTemp.Add(item.Temperature);
+            }
+            lbAvgInsideTemp.Text = tempService.countAverage(insideTemp).ToString();
+
+            var outsideTemp = new List<double>();
+            foreach (var item in OutsideDataList)
+            {
+                outsideTemp.Add(item.Temperature);
+            }
+            lbAvgOutsideTemp.Text = tempService.countAverage(outsideTemp).ToString();
+
+            lbConsumption.Text = tempService.CountConsumption(Settings, insideTemp, outsideTemp).ToString();
+            lbEstimatedConsumption.Text = tempService.EnergyPrediction(Settings, insideTemp, outsideTemp).ToString();
+
+            lbCost.Text = tempService.CountPrice(Settings, insideTemp, outsideTemp).ToString();
+            lbEstimatedCost.Text = tempService.PricePrediction(Settings, insideTemp, outsideTemp).ToString();
+
+        }
     }
 }
